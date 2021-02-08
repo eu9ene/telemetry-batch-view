@@ -206,8 +206,8 @@ object AddonRecommender extends DatabricksSupport {
 
     import spark.implicits._
     implicit val formats = DefaultFormats
-    val json_str = hadoopRead(s"$privateBucket/telemetry-ml/addon_recommender/only_guids_top_200.json")
-    val allowlist = parse(json_str).extract[List[String]]
+    val jsonStr = hadoopRead(s"$privateBucket/telemetry-ml/addon_recommender/only_guids_top_200.json")
+    val allowlist = parse(jsonStr).extract[List[String]]
     val clientAddons = getAddonData(spark, allowlist, amoDbMap, inputTable, dateFrom, sampling)
 
     val ratings = clientAddons
